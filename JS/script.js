@@ -7,23 +7,28 @@ async function renderMarkdown() {
     
     // 检查当前页面是否有 ID 为 content 的容器
     if (!contentContainer) {
-        console.log("当前页面不需要渲染 Markdown。");
         return;
     }
 
+    // --- 新增：动态获取 URL 中的文章名称 ---
+    // 例如：post_detail.html?name=post1
+    const urlParams = new URLSearchParams(window.location.search);
+    const postName = urlParams.get('name') || 'post1'; // 如果没有参数，默认加载 post1
+    const postPath = `articels/${postName}.md`;
+
     try {
-        // 获取 Markdown 文件内容（假设文件名为 article.md）
-        const response = await fetch('articels/post1.md');
+        // 获取 Markdown 文件内容
+        const response = await fetch(postPath);
         
         if (!response.ok) {
-            throw new Error("无法读取 Markdown 文件，请检查路径。");
+            throw new Error(`无法找到文章 "${postName}"，请检查文件路径。`);
         }
         
         const markdownText = await response.text();
         
         // 使用 marked 将文本转换为 HTML 并塞入容器
         contentContainer.innerHTML = marked.parse(markdownText);
-        console.log("Markdown 渲染成功！");
+        console.log(`文章 "${postName}" 渲染成功！`);
     } catch (error) {
         contentContainer.innerHTML = `<p style="color:red;">内容加载出错: ${error.message}</p>`;
     }
