@@ -10,10 +10,9 @@ async function renderMarkdown() {
         return;
     }
 
-    // --- 新增：动态获取 URL 中的文章名称 ---
     // 例如：post_detail.html?name=post1
     const urlParams = new URLSearchParams(window.location.search);
-    const postName = urlParams.get('name') || 'post1'; // 如果没有参数，默认加载 post1
+    const postName = urlParams.get('name') || 'post_noting'; // 如果没有参数，默认加载 post_noting
     const postPath = `articels/${postName}.md`;
 
     try {
