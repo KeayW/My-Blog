@@ -17,9 +17,13 @@ async function renderPostList() {
                 <h2>${post.title}</h2>
                 <p class="post-meta">发布于 ${post.date}</p>
                 <p>${post.excerpt}</p>
-                <a href="post_detail.html?name=${post.id}" class="read-more">阅读更多 →</a>
+                <a href="post_detail.html?name=${post.id}" class="read-more">阅读更多 →</a>  
             </article>
         `).join('');
+        //这里post.id和md的名称要对应 逻辑关系：post_list.json=>
+        //                                    post-list=>
+        //                                    post_detail.html?name=${post.id}=>
+        //                                    articels/${post.id}.md
 
         listContainer.innerHTML = listHtml;
     } catch (error) {
