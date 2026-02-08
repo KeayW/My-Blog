@@ -36,9 +36,10 @@ It's easy.  It's not overly bloated, unlike HTML.  Also, as the creator of [mark
 Ready to start writing?  Either start changing stuff on the left or
 [clear everything](/demo/?text=) with a simple click.
 
-    {
+    export function(){
         //这里是代码块尝试
         //使用缩进“Tab”来表示代码样式
+        String c = "I LOVE CODE"
     }
 
 换行尝试<br>

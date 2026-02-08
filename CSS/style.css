@@ -164,15 +164,30 @@ body.detail-page {
 
 /*markdown样式*/
 .markdown-body {
-    background-color: #fff; /* 背景设为白色 */
+    background-color: #000000; /* 背景设为黑色 */
     box-sizing: border-box;
-    min-width: 200px;
+    min-width: 980px;
     max-width: 980px; /* 限制文章最大宽度，防止太宽影响阅读 */
     margin: 0 auto;   /* 水平居中 */
     padding: 45px;    /* 内部留白 */
     /*border: 1px solid #fff; /* 可选：加个边框 */
     border-radius: 8px;     /* 可选：圆角 */
 }
+
+.markdown-body code {
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+/* 调节hljs代码块高亮 */
+.hljs-comment{
+    color: #6a9955;                                /* 注释颜色 */
+    font-style: italic;                                         /* 斜体 */
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;  /* 中文字体 */
+    opacity: 0.7;                                               /* 透明度 */
+} 
+
 
 /* 适配手机端，缩小边距 */
 @media (max-width: 767px) {
