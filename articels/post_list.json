@@ -1,24 +1,32 @@
 [
   {
     "id": "post1",
+    "type":"md",
+    "file": "articels/post1.md",
     "title": "第一篇博客文章",
     "date": "2026年2月6日",
     "excerpt": "这是我的个人博客的第一篇内容。我正在学习如何使用 HTML 和 CSS 构建自己的网站..."
   },
   {
     "id": "post2",
+    "type":"md",
+    "file": "articels/post2.md",
     "title": "VSCode 开发环境配置指南",
     "date": "2026年2月5日",
     "excerpt": "配置好 Git 和 Live Server 后，开发效率提升了很多..."
   },
   {
-    "id": "Picture_try",
+    "id": "post3",
+    "type":"html",
+    "file": "html/post3.html",
     "title": "尝试上传图片",
     "date": "2026年2月5日",
     "excerpt": "试试传图片"
   },
   {
     "id": "WebLog",
+    "type":"md",
+    "file": "articels/WebLog.md",
     "title": "Web的开发日志",
     "date": "2026年2月8日",
     "excerpt": "记录开发过程的日志，包括遇到的问题和解决方法。"
