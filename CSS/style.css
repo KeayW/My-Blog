@@ -5,6 +5,8 @@
     box-sizing: border-box;
 }
 
+/* 全局样式 */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -198,6 +200,17 @@ body.detail-page {
     font-family: "Microsoft YaHei", "PingFang SC", sans-serif;  /* 中文字体 */
     opacity: 0.7;                                               /* 透明度 */
 } 
+
+/*图片样式*/
+#content img{
+    max-height: 700px;
+    max-width: 100%;    /* 图片宽度最大不超过容器 */
+    height: auto;       /* 高度自适应保持比例 */
+    display: block;     /* 块级显示，方便居中 */
+    margin: 20px auto;  /* 上下留白并水平居中 */
+    border-radius: 8px; /* 添加圆角 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 添加轻微阴影 */
+}
 
 
 /* 适配手机端，缩小边距 */
