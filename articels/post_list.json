@@ -1,20 +1,14 @@
-[
+[ 
   {
-    "id": "post1",
-    "type":"md",
-    "file": "articels/post1.md",
-    "title": "第一篇博客文章",
-    "date": "2026年2月6日",
-    "excerpt": "这是我的个人博客的第一篇内容。我正在学习如何使用 HTML 和 CSS 构建自己的网站..."
+    "id": "game_2048",
+    "type": "game",
+    "file": "JS/games/game_2048.js",
+    "css": "CSS/game_2048.css",
+    "title": "摸鱼时间：2048",
+    "date": "2026年2月9日",
+    "excerpt": "经典的2048小游戏，使用原生JS编写。支持更换主题和记录最高分。"
   },
-  {
-    "id": "post2",
-    "type":"md",
-    "file": "articels/post2.md",
-    "title": "VSCode 开发环境配置指南",
-    "date": "2026年2月5日",
-    "excerpt": "配置好 Git 和 Live Server 后，开发效率提升了很多..."
-  },
+
   {
     "id": "post3",
     "type":"html",
@@ -23,6 +17,25 @@
     "date": "2026年2月5日",
     "excerpt": "试试传图片"
   },
+  
+  {
+    "id": "post2",
+    "type":"md",
+    "file": "articels/post2.md",
+    "title": "VSCode 开发环境配置指南",
+    "date": "2026年2月5日",
+    "excerpt": "配置好 Git 和 Live Server 后，开发效率提升了很多..."
+  },
+
+  {
+    "id": "post1",
+    "type":"md",
+    "file": "articels/post1.md",
+    "title": "第一篇博客文章",
+    "date": "2026年2月6日",
+    "excerpt": "这是我的个人博客的第一篇内容。我正在学习如何使用 HTML 和 CSS 构建自己的网站..."
+  },
+
   {
     "id": "WebLog",
     "type":"md",

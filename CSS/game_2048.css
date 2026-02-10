@@ -1,0 +1,219 @@
+/* ==================================
+   2048 游戏专属样式 (UI重制版)
+================================== */
+
+/* 定义色彩和尺寸变量，方便统一管理 */
+:root {
+    --gb-bg-main: #eef2f7;    /* 整体背景灰蓝 */
+    --gb-bg-grid: #dbe4ed;    /* 棋盘底座深灰蓝 */
+    --gb-bg-cell: rgba(255, 255, 255, 0.5); /* 空格子半透明 */
+    --gb-text-dark: #2c3e50;  /* 深色文字 */
+    --gb-text-light: #ffffff; /* 浅色文字 */
+    --gb-border-color: #bdc3c7; /* 边框颜色 */
+    --gb-accent: #3498db;     /* 强调色(按钮等) */
+    --gb-accent-hover: #2980b9; /* 按钮悬停色 */
+    
+    /* 尺寸定义，JS计算位置需要依赖这些值 */
+    --grid-padding: 10px;
+    --grid-gap: 12px;
+    --cell-size: 85px; 
+    /* 容器总宽 = 2*padding + 4*cell + 3*gap = 20 + 340 + 36 = 396px */
+    --container-width: 450px;
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    user-select: none; /* 禁止选中文本 */
+}
+
+/* 1. 游戏主界面大方框 */
+.game-container {
+    position: relative;
+    width: var(--container-width);
+    background: var(--gb-bg-main);
+    padding: 20px;
+    /* 清晰的圆角方框包裹 */
+    border: 3px solid var(--gb-border-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* 立体阴影 */
+    touch-action: none;
+}
+
+/* 头部信息栏 */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* 左侧容器：包含标题和新游戏按钮 */
+.header-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /*height: 60px; /* 稍微给点高度以便分布 */
+}
+
+.game-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--gb-text-dark);
+    margin: 0;
+}
+
+/* 新加入的“新游戏”小按钮 */
+.new-game-btn {
+    background: var(--gb-accent);
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: fit-content; /* 宽度自适应内容 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.new-game-btn:hover {
+    background: var(--gb-accent-hover);
+}
+
+.scores-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.score-box {
+    background: white;
+    padding: 5px 12px;
+    border-radius: 6px;
+    text-align: center;
+    min-width: 65px;
+    border: 2px solid var(--gb-border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.score-box span {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--gb-accent);
+}
+.score-label {
+    font-size: 11px;
+    color: #7f8c8d;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* 2. 4x4 网格区域方框 */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, var(--cell-size));
+    grid-template-rows: repeat(4, var(--cell-size));
+    gap: var(--grid-gap);
+    padding: var(--grid-padding);
+    
+    background: var(--gb-bg-grid);
+    /* 清晰的内凹方框包裹 */
+    border: 3px solid #aab7c4;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.08); /* 内阴影营造凹陷感 */
+    
+    position: relative;
+    /* 高度需要明确，用于绝对定位计算基准 */
+    height: calc(var(--cell-size) * 4 + var(--grid-gap) * 3 + var(--grid-padding) * 2); 
+    box-sizing: border-box;
+}
+
+.grid-cell {
+    background: var(--gb-bg-cell);
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 3. 动态数字方块 (圆角+颜色渐变) */
+.tile {
+    position: absolute;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 8px; /* 圆角方框 */
+    
+    font-weight: bold;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    transition: all 0.1s ease-in-out;
+    z-index: 10;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.05); /* 微妙的边框增加质感 */
+}
+
+/* --- 核心：蓝色色系渐变 (由浅到深) --- */
+/* 小数字：浅色背景，深色文字 */
+.tile-2    { background: #f0f9ff; color: #475c75; }
+.tile-4    { background: #dff2fd; color: #475c75; }
+.tile-8    { background: #bae1fa; color: #475c75; }
+/* 中等数字：中等蓝色，文字变白 */
+.tile-16   { background: #8ccbf7; color: var(--gb-text-light); }
+.tile-32   { background: #5cb3f2; color: var(--gb-text-light); }
+.tile-64   { background: #3498db; color: var(--gb-text-light); }
+/* 大数字：深蓝色 */
+.tile-128  { background: #2980b9; color: var(--gb-text-light); font-size: 32px; box-shadow: 0 0 10px rgba(41, 128, 185, 0.4); }
+.tile-256  { background: #236fa1; color: var(--gb-text-light); font-size: 32px; box-shadow: 0 0 15px rgba(35, 111, 161, 0.5); }
+.tile-512  { background: #1c5a85; color: var(--gb-text-light); font-size: 32px; box-shadow: 0 0 20px rgba(28, 90, 133, 0.6); }
+/* 超大数字：深邃夜空蓝 */
+.tile-1024 { background: #154360; color: var(--gb-text-light); font-size: 28px; }
+.tile-2048 { background: #0d2e42; color: var(--gb-text-light); font-size: 28px; box-shadow: 0 0 25px rgba(52, 152, 219, 0.8); border: 2px solid #f39c12;}
+
+/* 菜单遮罩层美化 */
+.game-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(238, 242, 247, 0.92); /* 半透明背景 */
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    backdrop-filter: blur(2px); /* 毛玻璃效果 */
+}
+
+.overlay-title {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: var(--gb-text-dark);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.game-btn {
+    background: var(--gb-accent);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px; /* 圆角按钮 */
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+    transition: transform 0.1s, background 0.2s;
+}
+.game-btn:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+.game-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(52, 152, 219, 0.3);
+}
