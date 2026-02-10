@@ -53,7 +53,7 @@ function renderDispatcher(postInfo) {
             displayHtml(postInfo.file || `articels/${postInfo.id}.html`, container);
             break;
         case 'game':
-            displayGame(postInfo.file, container);
+            displayGame(postInfo, container);
             break;
         default:
             container.innerHTML = `<p style="color:orange;">暂不支持的类型: ${postInfo.type}</p>`;
@@ -87,13 +87,21 @@ async function displayHtml(filePath, container) {
     }
 }
 
-// 渲染小游戏 (示例)
-function displayGame(gameScriptPath, container) {
-    container.innerHTML = `<h3>游戏加载中...</h3><canvas id="gameCanvas"></canvas>`;
-    // 这里可以动态加载游戏的 JS 文件
-    const script = document.createElement('script');
-    script.src = gameScriptPath;
-    document.body.appendChild(script);
+// 渲染小游戏
+function displayGame(postInfo, container) {
+   container.innerHTML = ''; // 清空内容
+
+    //动态加载JS
+    if (postInfo.file) {
+        const script = document.createElement('script');
+        script.src = postInfo.file;
+        script.onerror = () => {
+            container.innerHTML = '<p style="color:red;">游戏脚本加载失败</p>';
+        };
+        document.body.appendChild(script);
+    } else {
+        container.innerHTML = '<p style="color:red;">未配置游戏脚本路径</p>';
+    }
 }
 
 // 执行初始化
